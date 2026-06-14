@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-carbon font-body;
+  }
+
+  ::selection {
+    @apply bg-lime text-carbon;
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-lime ring-offset-2 ring-offset-cream;
+  }
+
+  /* Prose styles for news articles */
+  .prose-editorial h2 {
+    @apply font-display text-2xl text-carbon mt-10 mb-4 leading-tight;
+  }
+  .prose-editorial h3 {
+    @apply font-display text-xl text-carbon mt-8 mb-3 leading-tight;
+  }
+  .prose-editorial p {
+    @apply font-body text-base text-ink/80 leading-relaxed mb-5;
+  }
+  .prose-editorial ul {
+    @apply mb-5 space-y-2 pl-5;
+  }
+  .prose-editorial ol {
+    @apply mb-5 space-y-2 pl-5 list-decimal;
+  }
+  .prose-editorial li {
+    @apply font-body text-base text-ink/80 leading-relaxed;
+  }
+  .prose-editorial ul li::before {
+    content: '—';
+    @apply mr-2 text-mist;
+  }
+  .prose-editorial strong {
+    @apply font-semibold text-carbon;
+  }
+}
+
+@layer components {
+  .container-main {
+    @apply max-w-6xl mx-auto px-4 md:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .section-alt {
+    @apply bg-parchment py-16 md:py-24;
+  }
+
+  /* Btn variants */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 font-body font-semibold text-sm bg-carbon text-cream border border-carbon rounded-sm px-6 py-3.5 hover:bg-ink transition-colors duration-150;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 font-body font-semibold text-sm bg-transparent text-carbon border border-carbon rounded-sm px-6 py-3.5 hover:bg-parchment transition-colors duration-150;
+  }
+
+  .btn-lime {
+    @apply inline-flex items-center gap-2 font-body font-semibold text-sm bg-lime text-carbon border border-carbon rounded-sm px-6 py-3.5 hover:bg-lime-hover transition-colors duration-150;
+  }
+}
+
+@layer utilities {
+  /* Ticker pause on hover */
+  .ticker-pause:hover .ticker-inner {
+    animation-play-state: paused;
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-ticker-y,
+    .animate-float,
+    .animate-float-delayed {
+      animation: none !important;
+    }
+    * {
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
