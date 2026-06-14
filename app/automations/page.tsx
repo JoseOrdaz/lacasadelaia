@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import AutomationCard from '@/components/AutomationCard'
 import AnimatedReveal from '@/components/AnimatedReveal'
 import NewsletterForm from '@/components/NewsletterForm'
