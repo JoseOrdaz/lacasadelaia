@@ -1,12 +1,18 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { news } from '@/data/news'
+import { getNewsBySlug, getAllNewsSlugs, getAllNews } from '@/lib/payload'
 import type { NewsTag } from '@/types'
 import NewsletterForm from '@/components/NewsletterForm'
 
 interface Props {
   params: Promise<{ slug: string }>
+}
+
+function absoluteUrl(pathname: string) {
+  if (pathname.startsWith('http')) return pathname
+  return `https://lacasadelaia.com${pathname.startsWith('/') ? pathname : `/${pathname}`}`
 }
 
 const tagColors: Record<NewsTag, string> = {
@@ -27,12 +33,13 @@ function formatDate(dateStr: string) {
 }
 
 export async function generateStaticParams() {
-  return news.map((n) => ({ slug: n.slug }))
+  const slugs = await getAllNewsSlugs()
+  return slugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const article = news.find((n) => n.slug === slug)
+  const article = await getNewsBySlug(slug)
   if (!article) return {}
   return {
     title: article.title,
@@ -42,16 +49,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: article.excerpt,
       type: 'article',
       publishedTime: article.date,
+      images: [{ url: absoluteUrl(article.image), alt: article.imageAlt }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.excerpt,
+      images: [absoluteUrl(article.image)],
     },
   }
 }
 
 export default async function NewsArticlePage({ params }: Props) {
   const { slug } = await params
-  const article = news.find((n) => n.slug === slug)
+  const article = await getNewsBySlug(slug)
   if (!article) notFound()
 
-  const relatedArticles = news
+  const allNews = await getAllNews()
+  const relatedArticles = allNews
     .filter(
       (n) =>
         n.slug !== article.slug &&
@@ -76,6 +91,17 @@ export default async function NewsArticlePage({ params }: Props) {
 
       <article className="container-main py-12 md:py-16">
         <div className="max-w-2xl">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-sm border border-carbon shadow-card mb-8 bg-parchment">
+            <Image
+              src={article.image}
+              alt={article.imageAlt}
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 896px"
+            />
+          </div>
+
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-6">
             {article.tags.map((tag) => (

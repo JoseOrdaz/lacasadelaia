@@ -3,10 +3,9 @@
 import { useState } from 'react'
 import TemplateCard from '@/components/TemplateCard'
 import NewsletterForm from '@/components/NewsletterForm'
-import { templates } from '@/data/templates'
 import type { Template } from '@/types'
 
-export default function TemplatesClient() {
+export default function TemplatesClient({ templates }: { templates: Template[] }) {
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null)
   const [modalEmail, setModalEmail] = useState('')
   const [modalStatus, setModalStatus] = useState<'idle' | 'loading' | 'success'>('idle')

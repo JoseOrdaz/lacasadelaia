@@ -6,9 +6,7 @@ import ToolCard from '@/components/ToolCard'
 import NewsCard from '@/components/NewsCard'
 import NewsletterForm from '@/components/NewsletterForm'
 import AnimatedReveal from '@/components/AnimatedReveal'
-import { featuredAutomations } from '@/data/automations'
-import { featuredTools } from '@/data/tools'
-import { featuredNews } from '@/data/news'
+import { getFeaturedAutomations, getFeaturedNews, getFeaturedTools } from '@/lib/payload'
 
 const whyAutomate = [
   {
@@ -31,7 +29,13 @@ const whyAutomate = [
   },
 ]
 
-export default function Home() {
+export default async function Home() {
+  const [featuredAutomations, featuredNews, featuredTools] = await Promise.all([
+    getFeaturedAutomations(),
+    getFeaturedNews(),
+    getFeaturedTools(),
+  ])
+
   return (
     <>
       <Hero />

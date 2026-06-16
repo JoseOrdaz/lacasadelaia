@@ -40,3 +40,4 @@ Thumbs.db
 .next-root-bak/
 .claude/
 
+.npm-cache/

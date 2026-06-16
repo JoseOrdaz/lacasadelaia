@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import AutomationCard from '@/components/AutomationCard'
 import AnimatedReveal from '@/components/AnimatedReveal'
 import NewsletterForm from '@/components/NewsletterForm'
-import { automations } from '@/data/automations'
+import { getAllAutomations } from '@/lib/payload'
 
 export const metadata: Metadata = {
   title: 'Automatizaciones con IA',
@@ -10,7 +10,9 @@ export const metadata: Metadata = {
     'Diseñamos e implementamos automatizaciones con IA para pymes y freelancers. Ahorra tiempo, elimina tareas repetitivas y escala tu negocio sin ampliar el equipo.',
 }
 
-export default function AutomationsPage() {
+export default async function AutomationsPage() {
+  const automations = await getAllAutomations()
+
   return (
     <div className="bg-cream min-h-screen">
       {/* Page header */}

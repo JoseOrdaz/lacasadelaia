@@ -68,6 +68,8 @@ export interface NewsItem {
   slug: string
   title: string
   excerpt: string
+  image: string
+  imageAlt: string
   content: string
   keyIdea: string
   date: string

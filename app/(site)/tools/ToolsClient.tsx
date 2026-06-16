@@ -3,12 +3,11 @@
 import { useState } from 'react'
 import ToolCard from '@/components/ToolCard'
 import CategoryPill from '@/components/CategoryPill'
-import { tools, categories } from '@/data/tools'
-import type { ToolCategory } from '@/types'
+import type { Tool, ToolCategory } from '@/types'
 
 const ALL = 'Todas'
 
-export default function ToolsClient() {
+export default function ToolsClient({ tools, categories }: { tools: Tool[]; categories: string[] }) {
   const [active, setActive] = useState<string>(ALL)
 
   const filtered =

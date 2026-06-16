@@ -1,20 +1,19 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { news } from '@/data/news'
-import type { NewsTag } from '@/types'
+import type { NewsItem, NewsTag } from '@/types'
 import NewsCard from './NewsCard'
 import AnimatedReveal from './AnimatedReveal'
 
 const ALL = 'Todas'
 
-export default function NewsFilters() {
+export default function NewsFilters({ news }: { news: NewsItem[] }) {
   const [query, setQuery] = useState('')
   const [activeTag, setActiveTag] = useState<string>(ALL)
 
   const allTags = useMemo<string[]>(
     () => [ALL, ...[...new Set(news.flatMap((n) => n.tags))]],
-    []
+    [news]
   )
 
   const filtered = useMemo(() => {

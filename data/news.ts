@@ -7,6 +7,8 @@ export const news: NewsItem[] = [
     title: 'Cómo elegir una herramienta de IA sin perder horas comparando',
     excerpt:
       'El mercado de herramientas de IA crece cada semana. La clave no es probarlas todas, sino saber qué preguntas hacerse antes de descargar la tarjeta.',
+    image: '/news/tool-selection.svg',
+    imageAlt: 'Ilustración abstracta sobre selección de herramientas de IA',
     date: '2025-05-28',
     tags: ['Herramientas', 'Productividad'],
     readTime: '5 min',
@@ -63,6 +65,8 @@ export const news: NewsItem[] = [
     title: 'Automatizaciones sencillas que una pyme puede aplicar esta semana',
     excerpt:
       'No hace falta un equipo técnico ni un presupuesto grande. Hay automatizaciones con IA que cualquier empresa pequeña puede montar en horas y empezar a notar el ahorro el mismo día.',
+    image: '/news/automation-pymes.svg',
+    imageAlt: 'Ilustración abstracta sobre automatización para pymes',
     date: '2025-06-03',
     tags: ['Automatización', 'Productividad'],
     readTime: '6 min',
@@ -109,6 +113,8 @@ export const news: NewsItem[] = [
     title: 'Qué mirar antes de pagar por una herramienta de IA',
     excerpt:
       'El modelo freemium de muchas herramientas de IA está diseñado para enganchar y luego facturar. Esto no significa que no valgan. Significa que hay que ser más cuidadoso con lo que se paga.',
+    image: '/news/roi-check.svg',
+    imageAlt: 'Ilustración abstracta sobre analizar el retorno de una herramienta',
     date: '2025-06-07',
     tags: ['Herramientas', 'IA generativa'],
     readTime: '4 min',
@@ -157,6 +163,8 @@ export const news: NewsItem[] = [
     title: 'IA para marketing: usos prácticos más allá de generar posts',
     excerpt:
       'El uso más básico de la IA en marketing es generar texto. Pero hay aplicaciones mucho más valiosas que la mayoría de equipos no está usando todavía: análisis de audiencias, personalización de mensajes y optimización de campañas.',
+    image: '/news/marketing-ia.svg',
+    imageAlt: 'Ilustración abstracta sobre marketing con inteligencia artificial',
     date: '2025-06-10',
     tags: ['Marketing', 'IA generativa'],
     readTime: '7 min',
@@ -201,6 +209,8 @@ export const news: NewsItem[] = [
     title: 'Cómo usar IA para resumir reuniones y sacar tareas',
     excerpt:
       'Las reuniones producen decisiones que se olvidan y tareas que nunca se asignan formalmente. La IA puede convertir ese caos en un acta estructurada con responsables y fechas, en menos de dos minutos.',
+    image: '/news/meeting-notes.svg',
+    imageAlt: 'Ilustración abstracta sobre resumir reuniones y extraer tareas',
     date: '2025-06-12',
     tags: ['Productividad', 'Herramientas'],
     readTime: '4 min',
@@ -251,6 +261,8 @@ export const news: NewsItem[] = [
     title: 'Errores comunes al introducir IA en equipos pequeños',
     excerpt:
       'La adopción de IA en equipos pequeños falla casi siempre por las mismas razones. No son razones técnicas. Son razones de proceso, expectativas y cambio de hábitos.',
+    image: '/news/team-ops.svg',
+    imageAlt: 'Ilustración abstracta sobre adopción de IA en equipos',
     date: '2025-06-14',
     tags: ['IA generativa', 'Automatización'],
     readTime: '5 min',
