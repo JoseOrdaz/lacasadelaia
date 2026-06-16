@@ -25,7 +25,7 @@ export default function NewsFilters({ news }: { news: NewsItem[] }) {
         n.excerpt.toLowerCase().includes(query.toLowerCase())
       return matchesTag && matchesQuery
     })
-  }, [query, activeTag])
+  }, [news, query, activeTag])
 
   return (
     <div>
