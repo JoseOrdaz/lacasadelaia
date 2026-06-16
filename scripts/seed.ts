@@ -6,6 +6,7 @@
  */
 import path from 'path'
 import { getPayload } from 'payload'
+import type { SanitizedConfig } from 'payload'
 import { convertHTMLToLexical, editorConfigFactory } from '@payloadcms/richtext-lexical'
 import { JSDOM } from 'jsdom'
 import config from '../payload.config'
@@ -16,8 +17,9 @@ import { automations } from '../data/automations'
 
 async function seed() {
   console.log('Conectando a Payload / MongoDB...')
-  const payload = await getPayload({ config })
-  const editorConfig = await editorConfigFactory.default({ config })
+  const resolvedConfig = (await config) as SanitizedConfig
+  const payload = await getPayload({ config: resolvedConfig })
+  const editorConfig = await editorConfigFactory.default({ config: resolvedConfig })
 
   /* ── Limpiar colecciones ── */
   console.log('\nLimpiando colecciones existentes...')

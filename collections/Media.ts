@@ -8,7 +8,6 @@ export const Media: CollectionConfig = {
   },
   upload: {
     staticDir: 'media',
-    staticURL: '/media',
     mimeTypes: ['image/*'],
     imageSizes: [
       { name: 'card', width: 1200, height: 800 },
