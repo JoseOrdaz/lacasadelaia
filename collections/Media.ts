@@ -6,8 +6,16 @@ export const Media: CollectionConfig = {
     useAsTitle: 'filename',
     defaultColumns: ['filename', 'alt'],
   },
+  access: {
+    // Las imágenes se sirven en /api/media/file/*; el frontend necesita lectura pública
+    read: () => true,
+    create: ({ req }) => Boolean(req.user),
+    update: ({ req }) => Boolean(req.user),
+    delete: ({ req }) => Boolean(req.user),
+  },
   upload: {
-    staticDir: 'media',
+    // Fuera del repo; metadata en MongoDB, binarios en disco local
+    staticDir: 'storage/media',
     mimeTypes: ['image/*'],
     imageSizes: [
       { name: 'card', width: 1200, height: 800 },

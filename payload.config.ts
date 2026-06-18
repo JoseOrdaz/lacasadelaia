@@ -1,6 +1,7 @@
 import path from 'path'
 import { buildConfig } from 'payload'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import sharp from 'sharp'
 import { News } from './collections/News'
 import { Media } from './collections/Media'
 import { Automations } from './collections/Automations'
@@ -9,6 +10,7 @@ import { Templates } from './collections/Templates'
 import { Users } from './collections/Users'
 
 export default buildConfig({
+  sharp,
   admin: {
     user: Users.slug,
     suppressHydrationWarning: true,

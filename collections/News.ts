@@ -1,5 +1,10 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig, FieldHook } from 'payload'
 import { lexicalEditor, lexicalHTMLField } from '@payloadcms/richtext-lexical'
+import { normalizeNewsContentValue } from '@/lib/news-content'
+
+const normalizeContentHook: FieldHook = async ({ value, req }) => {
+  return normalizeNewsContentValue(value, req)
+}
 
 export const News: CollectionConfig = {
   slug: 'news',
@@ -27,9 +32,14 @@ export const News: CollectionConfig = {
     {
       name: 'imageAlt',
       type: 'text',
-      required: true,
       label: 'Texto alternativo',
-      admin: { description: 'Descripción accesible de la imagen' },
+      admin: { description: 'Obligatorio si hay imagen destacada' },
+      validate: (value: unknown, { siblingData }: { siblingData?: { image?: unknown } }) => {
+        if (siblingData?.image && !value) {
+          return 'El texto alternativo es obligatorio cuando hay imagen'
+        }
+        return true
+      },
     },
     {
       name: 'content',
@@ -37,6 +47,11 @@ export const News: CollectionConfig = {
       required: true,
       editor: lexicalEditor(),
       admin: { description: 'Contenido del artículo con editor visual' },
+      hooks: {
+        beforeValidate: [normalizeContentHook],
+        beforeChange: [normalizeContentHook],
+        afterRead: [normalizeContentHook],
+      },
     },
     lexicalHTMLField({
       htmlFieldName: 'content_html',

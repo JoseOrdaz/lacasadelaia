@@ -40,4 +40,11 @@ Thumbs.db
 .next-root-bak/
 .claude/
 
+# Payload uploads (metadata en MongoDB, archivos en disco)
+storage/
+media/
+
+# Next.js alternate build dir (ver next.config.ts)
+.next-dev/
+
 .npm-cache/

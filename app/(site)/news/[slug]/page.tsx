@@ -64,6 +64,7 @@ export default async function NewsArticlePage({ params }: Props) {
   const { slug } = await params
   const article = await getNewsBySlug(slug)
   if (!article) notFound()
+  const isSvg = article.image.toLowerCase().endsWith('.svg')
 
   const allNews = await getAllNews()
   const relatedArticles = allNews
@@ -97,7 +98,7 @@ export default async function NewsArticlePage({ params }: Props) {
               alt={article.imageAlt}
               fill
               priority
-              className="object-cover"
+              className={isSvg ? 'object-contain p-4' : 'object-cover'}
               sizes="(max-width: 768px) 100vw, 896px"
             />
           </div>

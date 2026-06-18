@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "npx tsx scripts/seed.ts",
+    "migrate:news-content": "npx tsx scripts/migrate-news-content.ts",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap"
   },

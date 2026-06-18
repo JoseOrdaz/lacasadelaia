@@ -25,6 +25,8 @@ function formatDate(dateStr: string) {
 }
 
 export default function NewsCard({ news, variant = 'default' }: NewsCardProps) {
+  const isSvg = news.image.toLowerCase().endsWith('.svg')
+
   return (
     <article className="group bg-cream border border-carbon rounded-sm shadow-card hover:shadow-card-hover transition-all duration-200 hover:-translate-y-0.5 flex flex-col">
       <div className="relative aspect-[16/10] overflow-hidden border-b border-carbon bg-parchment">
@@ -32,7 +34,7 @@ export default function NewsCard({ news, variant = 'default' }: NewsCardProps) {
           src={news.image}
           alt={news.imageAlt}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+          className={`${isSvg ? 'object-contain p-4' : 'object-cover'} transition-transform duration-300 group-hover:scale-[1.03]`}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
       </div>

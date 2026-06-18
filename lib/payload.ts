@@ -1,6 +1,7 @@
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import type { Tool, Template, NewsItem, Automation } from '@/types'
+import { newsContentToHTML } from '@/lib/news-content'
 
 async function getPayloadClient() {
   return getPayload({ config: configPromise })
@@ -50,7 +51,7 @@ function mapNews(doc: any): NewsItem {
     excerpt: doc.excerpt,
     image: imageUrl,
     imageAlt: doc.imageAlt || image?.alt || doc.title,
-    content: doc.content_html ?? doc.content ?? '',
+    content: doc.content_html ?? newsContentToHTML(doc.content),
     keyIdea: doc.keyIdea,
     date: doc.date,
     tags: doc.tags ?? [],
