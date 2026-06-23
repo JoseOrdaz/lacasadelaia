@@ -2,8 +2,8 @@ import type { NextConfig } from 'next'
 import { withPayload } from '@payloadcms/next/withPayload'
 
 const nextConfig: NextConfig = {
-  // Evita .next creado como root (p. ej. tras docker); usa carpeta escribible
-  distDir: process.env.NEXT_DIST_DIR || '.next-dev',
+  // En Vercel hay que usar .next; en local mantenemos .next-dev para evitar conflictos con builds previos.
+  distDir: process.env.NEXT_DIST_DIR || (process.env.VERCEL ? '.next' : '.next-dev'),
   images: {
     remotePatterns: [],
   },
