@@ -8,9 +8,18 @@ const normalizeContentHook: FieldHook = async ({ value, req }) => {
 
 export const News: CollectionConfig = {
   slug: 'news',
+  labels: { singular: 'Entrada del blog', plural: 'Blog' },
+  versions: { drafts: true, maxPerDoc: 20 },
+  access: {
+    read: ({ req }) => req.user ? true : { or: [{ _status: { equals: 'published' } }, { _status: { exists: false } }] },
+    create: ({ req }) => Boolean(req.user),
+    update: ({ req }) => Boolean(req.user),
+    delete: ({ req }) => Boolean(req.user),
+  },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'featured', 'date'],
+    defaultColumns: ['title', '_status', 'date'],
+    description: 'Entradas del blog. Guarda un borrador o pulsa Publicar para hacerlo visible.',
   },
   fields: [
     { name: 'title', type: 'text', required: true },
@@ -19,6 +28,7 @@ export const News: CollectionConfig = {
       type: 'text',
       required: true,
       unique: true,
+      validate: (value: unknown) => typeof value === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) ? true : 'Usa letras minúsculas sin acentos, números y guiones.',
       admin: { description: 'Identificador de URL, ej: como-elegir-herramienta-ia' },
     },
     { name: 'excerpt', type: 'textarea', required: true },

@@ -38,6 +38,7 @@ export default function NewsFilters({ news }: { news: NewsItem[] }) {
           </span>
           <input
             type="search"
+            aria-label="Buscar artículos"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Buscar artículos..."
@@ -60,6 +61,7 @@ export default function NewsFilters({ news }: { news: NewsItem[] }) {
             <button
               key={tag}
               onClick={() => setActiveTag(tag)}
+              aria-pressed={activeTag === tag}
               className={`text-xs font-body font-semibold px-3 py-1.5 rounded-sm border transition-all duration-150 ${
                 activeTag === tag
                   ? 'bg-carbon text-cream border-carbon'
@@ -97,9 +99,9 @@ export default function NewsFilters({ news }: { news: NewsItem[] }) {
         </div>
       ) : (
         <div className="py-20 text-center">
-          <p className="font-display text-2xl text-carbon mb-3">Sin resultados</p>
+          <p className="font-display text-2xl text-carbon mb-3">{news.length ? 'Sin resultados' : 'Las primeras guías, próximamente.'}</p>
           <p className="font-body text-sm text-mist max-w-sm mx-auto">
-            No hemos encontrado noticias con esos filtros. Prueba con otra búsqueda.
+            {news.length ? 'No hemos encontrado artículos con esos filtros. Prueba con otra búsqueda.' : 'Aquí encontrarás ideas prácticas sobre automatización, IA y desarrollo. Mientras tanto, puedes contarme tu proyecto.'}
           </p>
           <button
             onClick={() => { setQuery(''); setActiveTag(ALL) }}

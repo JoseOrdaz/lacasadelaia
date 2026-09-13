@@ -14,8 +14,8 @@ export const Media: CollectionConfig = {
     delete: ({ req }) => Boolean(req.user),
   },
   upload: {
-    // Fuera del repo; metadata en MongoDB, binarios en disco local
-    staticDir: 'storage/media',
+    // Binarios en GridFS (MongoDB) vía lib/storage/gridfs.ts, no en disco:
+    // el plugin de cloud-storage activa disableLocalStorage en payload.config.ts.
     mimeTypes: ['image/*'],
     imageSizes: [
       { name: 'card', width: 1200, height: 800 },

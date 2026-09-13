@@ -18,46 +18,18 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: {
-    default: 'La Casa de la IA | Herramientas, plantillas y noticias de IA',
-    template: '%s | La Casa de la IA',
-  },
-  description:
-    'Recursos prácticos de inteligencia artificial para profesionales: herramientas, plantillas, noticias y automatizaciones para ahorrar tiempo.',
-  keywords: [
-    'herramientas IA',
-    'inteligencia artificial',
-    'plantillas IA',
-    'automatización',
-    'productividad',
-    'ChatGPT',
-    'Claude',
-    'freelancers',
-    'pymes',
-    'noticias IA',
-  ],
+  metadataBase: new URL('https://lacasadelaia.com'),
+  title: { default: 'Automatización con IA y n8n | La Casa de la IA', template: '%s | La Casa de la IA' },
+  description: 'Automatización con IA, n8n e integraciones para empresas y particulares en España. Más de 15 años desarrollando soluciones tecnológicas. Trato directo.',
   authors: [{ name: 'La Casa de la IA' }],
-  creator: 'La Casa de la IA',
-  icons: {
-    icon: '/favicon.png',
-    shortcut: '/favicon.png',
-    apple: '/favicon.png',
-  },
+  icons: { icon: '/favicon.png', apple: '/favicon.png' },
   openGraph: {
-    type: 'website',
-    locale: 'es_ES',
-    url: 'https://lacasadelaia.com',
-    siteName: 'La Casa de la IA',
-    title: 'La Casa de la IA | Herramientas, plantillas y noticias de IA',
-    description:
-      'Recursos prácticos de inteligencia artificial para profesionales: herramientas, plantillas, noticias y automatizaciones para ahorrar tiempo.',
+    type: 'website', locale: 'es_ES', siteName: 'La Casa de la IA',
+    title: 'Cuéntame qué haces. Buscamos cómo mejorarlo.',
+    description: 'Automatización con IA y desarrollo a medida. Más de 15 años de experiencia. Tecnología con trato directo.',
+    images: [{ url: '/og', width: 1200, height: 630, alt: 'La Casa de la IA — Automatización con IA y desarrollo a medida' }],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'La Casa de la IA | Herramientas, plantillas y noticias de IA',
-    description:
-      'Recursos prácticos de inteligencia artificial para profesionales: herramientas, plantillas, noticias y automatizaciones para ahorrar tiempo.',
-  },
+  twitter: { card: 'summary_large_image', title: 'La Casa de la IA — Automatización con IA y n8n', description: 'Cuéntame qué haces. Buscamos cómo mejorarlo.', images: ['/og'] },
   robots: { index: true, follow: true },
 }
 
@@ -65,8 +37,9 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${playfair.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col">
+        <a href="#contenido" className="skip-link">Saltar al contenido</a>
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="contenido" tabIndex={-1} className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

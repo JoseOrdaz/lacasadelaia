@@ -71,7 +71,7 @@ export default function NewsCard({ news, variant = 'default' }: NewsCardProps) {
 
       <div className="px-5 pb-5">
         <Link
-          href={`/news/${news.slug}`}
+          href={`/blog/${news.slug}`}
           className="block w-full text-center text-sm font-body font-semibold text-carbon border border-carbon rounded-sm py-2.5 hover:bg-carbon hover:text-cream transition-colors duration-150"
         >
           Leer artículo →

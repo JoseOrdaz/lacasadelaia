@@ -1,6 +1,15 @@
+import { cache } from 'react'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
-import type { Tool, Template, NewsItem, Automation } from '@/types'
+import type {
+  Tool,
+  Template,
+  NewsItem,
+  Automation,
+  Service,
+  UseCase,
+  Testimonial,
+} from '@/types'
 import { newsContentToHTML } from '@/lib/news-content'
 
 async function getPayloadClient() {
@@ -76,7 +85,73 @@ function mapAutomation(doc: any): Automation {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapService(doc: any): Service {
+  return {
+    id: String(doc.id),
+    slug: doc.slug,
+    title: doc.title,
+    tagline: doc.tagline,
+    description: doc.description,
+    icon: doc.icon,
+    bullets: (doc.bullets ?? []).map((b: { text: string }) => b.text),
+    href: doc.href,
+    order: doc.order ?? 0,
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapUseCase(doc: any): UseCase {
+  return {
+    id: String(doc.id),
+    title: doc.title,
+    sector: doc.sector,
+    problem: doc.problem,
+    nodes: (doc.nodes ?? []).map((n: { label: string; kind: UseCase['nodes'][number]['kind'] }) => ({
+      label: n.label,
+      kind: n.kind,
+    })),
+    metrics: (doc.metrics ?? []).map((m: { value: string; label: string }) => ({
+      value: m.value,
+      label: m.label,
+    })),
+    tools: (doc.tools ?? []).map((t: { name: string }) => t.name),
+    order: doc.order ?? 0,
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapTestimonial(doc: any): Testimonial {
+  return {
+    id: String(doc.id),
+    quote: doc.quote,
+    author: doc.author,
+    role: doc.role,
+    company: doc.company,
+    result: doc.result,
+    order: doc.order ?? 0,
+  }
+}
+
 /* ── Query helpers ── */
+
+export async function getServices(): Promise<Service[]> {
+  const payload = await getPayloadClient()
+  const { docs } = await payload.find({ collection: 'services', sort: 'order', limit: 20 })
+  return docs.map(mapService)
+}
+
+export async function getUseCases(): Promise<UseCase[]> {
+  const payload = await getPayloadClient()
+  const { docs } = await payload.find({ collection: 'use-cases', sort: 'order', limit: 20 })
+  return docs.map(mapUseCase)
+}
+
+export async function getTestimonials(): Promise<Testimonial[]> {
+  const payload = await getPayloadClient()
+  const { docs } = await payload.find({ collection: 'testimonials', sort: 'order', limit: 20 })
+  return docs.map(mapTestimonial)
+}
 
 export async function getFeaturedAutomations(): Promise<Automation[]> {
   const payload = await getPayloadClient()
@@ -97,7 +172,7 @@ export async function getAllAutomations(): Promise<Automation[]> {
 export async function getFeaturedNews(): Promise<NewsItem[]> {
   const payload = await getPayloadClient()
   const { docs } = await payload.find({
-    collection: 'news',
+    collection: 'news', overrideAccess: false, draft: false,
     where: { featured: { equals: true } },
     sort: '-date',
     depth: 1,
@@ -108,24 +183,24 @@ export async function getFeaturedNews(): Promise<NewsItem[]> {
 
 export async function getAllNews(): Promise<NewsItem[]> {
   const payload = await getPayloadClient()
-  const { docs } = await payload.find({ collection: 'news', sort: '-date', depth: 1, limit: 100 })
+  const { docs } = await payload.find({ collection: 'news', overrideAccess: false, draft: false, sort: '-date', depth: 1, pagination: false })
   return docs.map(mapNews)
 }
 
-export async function getNewsBySlug(slug: string): Promise<NewsItem | null> {
+export const getNewsBySlug = cache(async (slug: string): Promise<NewsItem | null> => {
   const payload = await getPayloadClient()
   const { docs } = await payload.find({
-    collection: 'news',
+    collection: 'news', overrideAccess: false, draft: false,
     where: { slug: { equals: slug } },
     depth: 1,
     limit: 1,
   })
   return docs[0] ? mapNews(docs[0]) : null
-}
+})
 
 export async function getAllNewsSlugs(): Promise<string[]> {
   const payload = await getPayloadClient()
-  const { docs } = await payload.find({ collection: 'news', limit: 200, depth: 1 })
+  const { docs } = await payload.find({ collection: 'news', overrideAccess: false, draft: false, pagination: false, depth: 0 })
   return docs.map((d) => d.slug as string)
 }
 
@@ -149,4 +224,13 @@ export async function getAllTemplates(): Promise<Template[]> {
   const payload = await getPayloadClient()
   const { docs } = await payload.find({ collection: 'templates', limit: 100 })
   return docs.map(mapTemplate)
+}
+
+export async function getProfilePhoto(): Promise<{ url: string; alt: string } | null> {
+  try {
+    const payload = await getPayloadClient()
+    const profile = await payload.findGlobal({ slug: 'profile', depth: 1, overrideAccess: false })
+    const photo = profile.photo as { url?: string; alt?: string } | undefined
+    return photo?.url ? { url: photo.url, alt: photo.alt || 'El profesional detrás de La Casa de la IA' } : null
+  } catch { return null }
 }

@@ -18,6 +18,12 @@ const config: Config = {
         lime: '#C8F05C',
         'lime-hover': '#B8E048',
         'lime-light': '#EDF9C8',
+        // Capa de acento técnico: solo para canvas de nodos, flujos y gradientes.
+        // La identidad de marca sigue siendo cream + lime.
+        electric: '#4C5BF5',
+        'electric-soft': '#E7E9FE',
+        violet: '#7C4DF0',
+        'violet-soft': '#EFE7FE',
       },
       fontFamily: {
         display: ['var(--font-playfair)', 'Georgia', 'serif'],
@@ -46,6 +52,8 @@ const config: Config = {
         'float': 'float 6s ease-in-out infinite',
         'float-delayed': 'float 6s ease-in-out 2s infinite',
         'reveal': 'reveal 0.6s ease-out forwards',
+        'dash': 'dash 1.6s linear infinite',
+        'node-pulse': 'nodePulse 2.4s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -67,6 +75,14 @@ const config: Config = {
         reveal: {
           '0%': { opacity: '0', transform: 'translateY(24px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        dash: {
+          '0%': { strokeDashoffset: '24' },
+          '100%': { strokeDashoffset: '0' },
+        },
+        nodePulse: {
+          '0%, 100%': { opacity: '0.35', transform: 'scale(1)' },
+          '50%': { opacity: '1', transform: 'scale(1.12)' },
         },
       },
     },

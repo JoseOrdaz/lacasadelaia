@@ -77,3 +77,56 @@ export interface NewsItem {
   readTime: string
   featured: boolean
 }
+
+/* ── Servicios (los 4 pilares) ───────────────────────────────────── */
+
+export type ServiceIcon = 'workflow' | 'instagram' | 'image' | 'building'
+
+export interface Service {
+  id: string
+  slug: string
+  title: string
+  tagline: string
+  description: string
+  icon: ServiceIcon
+  bullets: string[]
+  href: string
+  order: number
+}
+
+/* ── Casos de uso (canvas de nodos) ──────────────────────────────── */
+
+export type UseCaseNodeKind = 'trigger' | 'action' | 'ai' | 'output'
+
+export interface UseCaseNode {
+  label: string
+  kind: UseCaseNodeKind
+}
+
+export interface UseCaseMetric {
+  value: string
+  label: string
+}
+
+export interface UseCase {
+  id: string
+  title: string
+  sector: string
+  problem: string
+  nodes: UseCaseNode[]
+  metrics: UseCaseMetric[]
+  tools: string[]
+  order: number
+}
+
+/* ── Testimonios ─────────────────────────────────────────────────── */
+
+export interface Testimonial {
+  id: string
+  quote: string
+  author: string
+  role: string
+  company: string
+  result: string
+  order: number
+}

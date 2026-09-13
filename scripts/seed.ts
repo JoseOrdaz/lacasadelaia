@@ -14,6 +14,9 @@ import { tools } from '../data/tools'
 import { templates } from '../data/templates'
 import { news } from '../data/news'
 import { automations } from '../data/automations'
+import { services } from '../data/services'
+import { useCases } from '../data/use-cases'
+import { testimonials } from '../data/testimonials'
 
 async function seed() {
   console.log('Conectando a Payload / MongoDB...')
@@ -29,6 +32,9 @@ async function seed() {
     payload.delete({ collection: 'templates', where: {} }),
     payload.delete({ collection: 'news', where: {} }),
     payload.delete({ collection: 'automations', where: {} }),
+    payload.delete({ collection: 'services', where: {} }),
+    payload.delete({ collection: 'use-cases', where: {} }),
+    payload.delete({ collection: 'testimonials', where: {} }),
   ])
 
   /* ── Herramientas ── */
@@ -122,6 +128,60 @@ async function seed() {
     })
   }
   console.log(`  ✓ ${automations.length} automatizaciones`)
+
+  /* ── Servicios ── */
+  console.log('Seed: servicios...')
+  for (const service of services) {
+    await payload.create({
+      collection: 'services',
+      data: {
+        title: service.title,
+        slug: service.slug,
+        tagline: service.tagline,
+        description: service.description,
+        icon: service.icon,
+        bullets: service.bullets.map((text) => ({ text })),
+        href: service.href,
+        order: service.order,
+      },
+    })
+  }
+  console.log(`  ✓ ${services.length} servicios`)
+
+  /* ── Casos de uso ── */
+  console.log('Seed: casos de uso...')
+  for (const useCase of useCases) {
+    await payload.create({
+      collection: 'use-cases',
+      data: {
+        title: useCase.title,
+        sector: useCase.sector,
+        problem: useCase.problem,
+        nodes: useCase.nodes,
+        metrics: useCase.metrics,
+        tools: useCase.tools.map((name) => ({ name })),
+        order: useCase.order,
+      },
+    })
+  }
+  console.log(`  ✓ ${useCases.length} casos de uso`)
+
+  /* ── Testimonios ── */
+  console.log('Seed: testimonios...')
+  for (const testimonial of testimonials) {
+    await payload.create({
+      collection: 'testimonials',
+      data: {
+        quote: testimonial.quote,
+        author: testimonial.author,
+        role: testimonial.role,
+        company: testimonial.company,
+        result: testimonial.result,
+        order: testimonial.order,
+      },
+    })
+  }
+  console.log(`  ✓ ${testimonials.length} testimonios`)
 
   console.log('\n✅ Seed completado correctamente.')
   process.exit(0)
