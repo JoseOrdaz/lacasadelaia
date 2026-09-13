@@ -52,7 +52,7 @@ function mapNews(doc: any): NewsItem {
   const imageUrl =
     typeof image === 'string'
       ? image
-      : image?.sizes?.card?.url || image?.url || '/news/tool-selection.svg'
+      : image?.url || image?.sizes?.card?.url || '/news/tool-selection.svg'
   return {
     id: String(doc.id),
     slug: doc.slug,

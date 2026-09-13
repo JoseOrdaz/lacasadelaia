@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
+import ArticleImage from '@/components/ArticleImage'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getNewsBySlug, getAllNews } from '@/lib/payload'
@@ -67,7 +67,6 @@ export default async function NewsArticlePage({ params }: Props) {
   const { slug } = await params
   const article = await getNewsBySlug(slug)
   if (!article) notFound()
-  const isSvg = article.image.toLowerCase().endsWith('.svg')
 
   const allNews = await getAllNews()
   const relatedArticles = allNews
@@ -96,16 +95,7 @@ export default async function NewsArticlePage({ params }: Props) {
 
       <article className="container-main py-12 md:py-16">
         <div className="max-w-3xl mx-auto">
-          <div className="relative aspect-[16/9] overflow-hidden rounded-sm border border-carbon shadow-card mb-8 bg-parchment">
-            <Image
-              src={article.image}
-              alt={article.imageAlt}
-              fill
-              priority
-              className={isSvg ? 'object-contain p-4' : 'object-cover'}
-              sizes="(max-width: 768px) 100vw, 896px"
-            />
-          </div>
+          <ArticleImage src={article.image} alt={article.imageAlt} />
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-6">
