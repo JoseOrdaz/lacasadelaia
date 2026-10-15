@@ -34,7 +34,8 @@ export default function NewsCard({ news, variant = 'default' }: NewsCardProps) {
           src={news.image}
           alt={news.imageAlt}
           fill
-          className={`${isSvg ? 'object-contain p-4' : 'object-cover'} transition-transform duration-300 group-hover:scale-[1.03]`}
+          unoptimized={news.image.startsWith('/api/media/file/')}
+          className={`${isSvg ? 'object-contain p-4' : 'object-contain p-1'} transition-transform duration-300 group-hover:scale-[1.01]`}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
       </div>

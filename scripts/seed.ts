@@ -31,6 +31,7 @@ async function seed() {
     payload.delete({ collection: 'tools', where: {} }),
     payload.delete({ collection: 'templates', where: {} }),
     payload.delete({ collection: 'news', where: {} }),
+    payload.delete({ collection: 'tags', where: {} }),
     payload.delete({ collection: 'automations', where: {} }),
     payload.delete({ collection: 'services', where: {} }),
     payload.delete({ collection: 'use-cases', where: {} }),
@@ -75,6 +76,11 @@ async function seed() {
 
   /* ── Noticias ── */
   console.log('Seed: noticias...')
+  const tagIds = new Map<string, string | number>()
+  for (const name of [...new Set(news.flatMap((article) => article.tags))]) {
+    const tag = await payload.create({ collection: 'tags', data: { name } })
+    tagIds.set(name, tag.id)
+  }
   for (const article of news) {
     const media = await payload.create({
       collection: 'media',
@@ -101,7 +107,7 @@ async function seed() {
         content: lexicalContent,
         keyIdea: article.keyIdea,
         date: article.date,
-        tags: article.tags,
+        tags: article.tags.map((tag) => tagIds.get(tag)).filter((tag): tag is string | number => tag !== undefined),
         readTime: article.readTime,
         featured: article.featured,
       },

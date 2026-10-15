@@ -33,13 +33,7 @@ export interface Automation {
   featured: boolean
 }
 
-export type NewsTag =
-  | 'IA generativa'
-  | 'Automatización'
-  | 'Herramientas'
-  | 'Productividad'
-  | 'Marketing'
-  | 'Desarrollo'
+export type NewsTag = string
 
 export interface Tool {
   id: string

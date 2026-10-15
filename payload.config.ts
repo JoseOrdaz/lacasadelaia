@@ -7,6 +7,7 @@ import sharp from 'sharp'
 import { Inquiries } from './collections/Inquiries'
 import { Profile } from './globals/Profile'
 import { News } from './collections/News'
+import { Tags } from './collections/Tags'
 import { Media } from './collections/Media'
 import { Automations } from './collections/Automations'
 import { Tools } from './collections/Tools'
@@ -26,7 +27,7 @@ export default buildConfig({
     },
   },
   globals: [Profile],
-  collections: [Inquiries, Media, News, Automations, Services, UseCases, Testimonials, Tools, Templates, Users],
+  collections: [Inquiries, Media, Tags, News, Automations, Services, UseCases, Testimonials, Tools, Templates, Users],
   db: mongooseAdapter({
     // Atlas puede tardar en elegir primario tras un failover; 5s se quedaba corto.
     connectOptions: { serverSelectionTimeoutMS: 15000 },

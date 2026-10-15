@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .ts,.tsx",
     "test": "tsx scripts/check-site.ts",
     "seed": "npx tsx scripts/seed.ts",
+    "migrate:news-tags": "npx tsx --env-file=.env scripts/migrate-news-tags.ts",
     "seed:landing": "npx tsx scripts/seed-landing.ts",
     "migrate:news-content": "npx tsx scripts/migrate-news-content.ts",
     "generate:types": "payload generate:types",

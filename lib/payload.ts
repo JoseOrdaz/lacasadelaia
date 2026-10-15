@@ -63,7 +63,11 @@ function mapNews(doc: any): NewsItem {
     content: doc.content_html ?? newsContentToHTML(doc.content),
     keyIdea: doc.keyIdea,
     date: doc.date,
-    tags: doc.tags ?? [],
+    tags: (doc.tags ?? []).flatMap((tag: unknown) => {
+      if (typeof tag === 'string') return [tag]
+      if (tag && typeof tag === 'object' && 'name' in tag && typeof tag.name === 'string') return [tag.name]
+      return []
+    }),
     readTime: doc.readTime,
     featured: doc.featured ?? false,
   }
