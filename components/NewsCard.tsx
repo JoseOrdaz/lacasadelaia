@@ -29,7 +29,10 @@ export default function NewsCard({ news, variant = 'default' }: NewsCardProps) {
 
   return (
     <article className="group bg-cream border border-carbon rounded-sm shadow-card hover:shadow-card-hover transition-all duration-200 hover:-translate-y-0.5 flex flex-col">
-      <div className="relative aspect-[16/10] overflow-hidden border-b border-carbon bg-parchment">
+      <div
+        className="relative overflow-hidden border-b border-carbon bg-parchment"
+        style={{ aspectRatio: `${news.imageWidth ?? 1200} / ${news.imageHeight ?? 800}` }}
+      >
         <Image
           src={news.image}
           alt={news.imageAlt}

@@ -53,6 +53,8 @@ function mapNews(doc: any): NewsItem {
     typeof image === 'string'
       ? image
       : image?.url || image?.sizes?.card?.url || '/news/tool-selection.svg'
+  const imageWidth = typeof image === 'object' ? image?.width || image?.sizes?.card?.width : undefined
+  const imageHeight = typeof image === 'object' ? image?.height || image?.sizes?.card?.height : undefined
   return {
     id: String(doc.id),
     slug: doc.slug,
@@ -60,6 +62,8 @@ function mapNews(doc: any): NewsItem {
     excerpt: doc.excerpt,
     image: imageUrl,
     imageAlt: doc.imageAlt || image?.alt || doc.title,
+    imageWidth,
+    imageHeight,
     content: doc.content_html ?? newsContentToHTML(doc.content),
     keyIdea: doc.keyIdea,
     date: doc.date,

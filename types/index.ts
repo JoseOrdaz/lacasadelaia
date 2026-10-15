@@ -64,6 +64,8 @@ export interface NewsItem {
   excerpt: string
   image: string
   imageAlt: string
+  imageWidth?: number
+  imageHeight?: number
   content: string
   keyIdea: string
   date: string
