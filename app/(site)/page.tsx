@@ -31,7 +31,7 @@ export default async function Home() {
         <p className="eyebrow"><span className="status-dot" /> Tecnología útil. Trato directo.</p>
         <h1>Menos tareas.<br />Más tiempo.<br /><em>Así de sencillo.</em></h1>
         <p className="hero-description">Automatizo tareas y procesos con <strong>IA, n8n e integraciones</strong> para empresas y particulares. Para que dediques tu tiempo a lo que realmente importa.</p>
-        <div className="hero-actions"><a className="action" href="#contacto">Cuéntame qué quieres automatizar <span aria-hidden="true">→</span></a><a className="text-link" href="#soluciones">Ver soluciones <span aria-hidden="true">↗</span></a></div>
+        <div className="hero-actions"><a className="action" href="#contacto">Cuéntame qué quieres automatizar <span aria-hidden="true">→</span></a><a className="text-link" href="/descubre">Descubre qué puedes automatizar <span aria-hidden="true">↗</span></a></div>
         <p className="hero-proof"><span>+15</span> años desarrollando soluciones tecnológicas.<br className="mobile-break" /> Hablas conmigo, de principio a fin.</p>
       </div>
       <div className="hero-board" aria-label="Ejemplo de un email convertido en información organizada">

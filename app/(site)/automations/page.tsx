@@ -51,14 +51,14 @@ export default async function AutomationsPage() {
               Diseñamos tu automatización a medida
             </h2>
             <p className="font-body text-sm text-ink/70 leading-relaxed mb-8 max-w-md mx-auto">
-              Cuéntanos qué tareas te roban más tiempo y te proponemos una solución.
+              Responde unas preguntas y descubre qué tareas te roban más tiempo antes de pedir una propuesta.
               La consulta inicial es gratis.
             </p>
             <a
-              href="mailto:hola@lacasadelaia.com?subject=Consulta sobre automatización personalizada"
+              href="/descubre"
               className="btn-lime inline-flex"
             >
-              Solicitar consulta gratuita →
+              Hacer el diagnóstico gratuito →
             </a>
           </div>
         </AnimatedReveal>
