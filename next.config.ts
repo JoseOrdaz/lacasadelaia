@@ -8,6 +8,15 @@ const nextConfig: NextConfig = {
     remotePatterns: [],
   },
   serverExternalPackages: ['@monaco-editor/react', 'monaco-editor'],
+  async headers() {
+    return [{
+      source: '/',
+      headers: [{
+        key: 'Link',
+        value: '</.well-known/api-catalog>; rel="api-catalog", </api/openapi>; rel="service-desc"; type="application/json", </api/health>; rel="status"; type="application/json", </.well-known/ard.json>; rel="ard"; type="application/json", </.well-known/ai-catalog.json>; rel="describedby"; type="application/json", </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json"',
+      }],
+    }]
+  },
 }
 
 export default withPayload(nextConfig)

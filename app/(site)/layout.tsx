@@ -4,6 +4,7 @@ import '../globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import CookieConsent from '@/components/CookieConsent'
+import AgentTools from '@/components/AgentTools'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -43,6 +44,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         <main id="contenido" tabIndex={-1} className="flex-1">{children}</main>
         <Footer />
         <CookieConsent />
+        <AgentTools />
       </body>
     </html>
   )
