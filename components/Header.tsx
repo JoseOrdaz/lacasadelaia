@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 const links = [
-  ['/#soluciones', 'Soluciones'], ['/descubre', 'Descubre qué automatizar'], ['/#sobre-mi', 'Sobre mí'], ['/blog', 'Blog'], ['/tools', 'Herramientas'],
+  ['/#soluciones', 'Soluciones'], ['/descubre', 'Descubre qué automatizar'], ['/#seo-geo', 'SEO / GEO'], ['/#sobre-mi', 'Sobre mí'], ['/blog', 'Blog'], ['/tools', 'Herramientas'],
 ]
 export default function Header() {
   const pathname = usePathname()
