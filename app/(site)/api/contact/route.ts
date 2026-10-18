@@ -1,6 +1,7 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { validateContact } from '@/lib/contact'
+import { sendContactEmail } from '@/lib/contact-mail'
 
 export async function POST(request: Request) {
   if (request.headers.get('origin') !== new URL(request.url).origin) return Response.json({ error: 'Origen no permitido.' }, { status: 403 })
@@ -17,7 +18,13 @@ export async function POST(request: Request) {
     const recent = await payload.count({ collection: 'inquiries', overrideAccess: true, where: { and: [{ email: { equals: data.email } }, { createdAt: { greater_than: new Date(Date.now() - 60000).toISOString() } }] } })
     if (recent.totalDocs) return Response.json({ error: 'Ya has enviado una consulta recientemente. Espera un minuto antes de enviar otra.' }, { status: 429 })
     await payload.create({ collection: 'inquiries', overrideAccess: true, data })
-    return Response.json({ ok: true }, { status: 201 })
+    let mailed = false
+    try {
+      mailed = await sendContactEmail(data)
+    } catch (error) {
+      console.error('No se pudo enviar la consulta por SMTP.', error)
+    }
+    return Response.json({ ok: true, mailed }, { status: mailed ? 201 : 202 })
   } catch {
     return Response.json({ error: 'No he podido guardar tu consulta. Inténtalo de nuevo o escribe a hola@lacasadelaia.com.' }, { status: 503 })
   }
