@@ -16,15 +16,21 @@ export default function AvisoLegalPage() {
 
         <div className="bg-lime-light border border-lime rounded-sm p-5 mb-10">
           <p className="font-body text-sm text-carbon leading-relaxed">
-            <strong>Pendiente de completar.</strong> Este documento necesita los datos
-            identificativos reales del titular (nombre o razón social, NIF, domicilio y registro
-            mercantil si procede) y una revisión legal antes de publicarse.
+            <strong>Pendiente de completar antes de publicar.</strong> Falta facilitar el NIF y
+            confirmar si “La Casa de la IA” es el nombre legal o un nombre comercial. Conviene
+            revisar el texto con un profesional.
           </p>
         </div>
 
         <div className="prose-editorial">
           <h2>Titular del sitio</h2>
-          <p>Datos identificativos pendientes de incorporar.</p>
+          <p>
+            La Casa de la IA, persona autónoma.<br />
+            NIF: pendiente de facilitar.<br />
+            Domicilio: Carrer Sant Vicent Ferrer, Alboraya, Valencia, España.<br />
+            Email: <a href="mailto:hola@lacasadelaia.com" className="underline">hola@lacasadelaia.com</a>.<br />
+            Teléfono: <a href="tel:+34680851926" className="underline">680 851 926</a>.
+          </p>
 
           <h2>Objeto</h2>
           <p>

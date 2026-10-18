@@ -107,6 +107,11 @@ p { text-wrap: pretty; }
 .desktop-nav { display: flex; gap: 30px; margin-left: auto; font-size: 13px; color: #505348; }
 .desktop-nav a { padding-block: 15px; }
 .desktop-nav a:hover,.desktop-nav a[aria-current] { color: #1a1a18; text-decoration: underline; text-underline-offset: 7px; }
+.header-socials { display: flex; gap: 5px; }
+.header-socials a { display: grid; place-items: center; width: 30px; height: 30px; color: #667054; border: 1px solid transparent; border-radius: 50%; }
+.header-socials a:hover { color: #1a1a18; border-color: #cfd7bd; background: #f1f4e8; }
+.social-icon { object-fit: contain; }
+.mobile-socials { display: none; }
 .header-cta { background: #d4ed9b; padding: 12px 20px; border-radius: 4px; display: flex; gap: 25px; font-size: 13px; font-weight: 600; }
 .menu-toggle,.mobile-nav { display: none; }
 .studio h1,.studio h2,.studio h3,.footer-brand { font-family: var(--font-playfair), Georgia, serif; font-weight: 400; }
@@ -309,9 +314,23 @@ p { text-wrap: pretty; }
 .footer-brand span { display: block; font-family: var(--font-inter),sans-serif; font-size: 11px; color: #636a58; margin-top: 9px; }
 .footer-top > a:last-child { font-size: 13px; }
 .footer-resources { display: flex; gap: 25px; flex-wrap: wrap; font-size: 11px; padding: 30px 0; }
+.footer-social { display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 1px solid var(--studio-line); border-bottom: 1px solid var(--studio-line); padding: 17px 0; font-size: 11px; }
+.footer-social > span { color: #666d5b; }
+.footer-social-links { display: flex; gap: 22px; }
+.footer-social a { display: inline-flex; align-items: center; gap: 8px; }
 .footer-bottom { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--studio-line); padding-top: 20px; font-size: 10px; color: #666d5b; }
 .footer-bottom nav { display: flex; gap: 20px; }
 .site-footer a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.cookie-banner { position: fixed; right: 24px; bottom: 24px; left: 24px; z-index: 50; display: flex; align-items: end; justify-content: space-between; gap: 24px; width: min(760px, calc(100% - 48px)); margin-inline: auto; padding: 18px 20px; border: 1px solid #3c4930; background: #23281c; color: #faf9f4; box-shadow: 0 12px 30px #1a1a1830; }
+.cookie-banner-copy { max-width: 520px; }
+.cookie-banner strong { font-size: 13px; font-weight: 600; }
+.cookie-banner p { margin: 6px 0 0; color: #d7ddca; font-size: 12px; line-height: 1.55; }
+.cookie-banner p a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.cookie-banner-actions { display: flex; flex-shrink: 0; gap: 10px; }
+.cookie-banner button { padding: 9px 13px; border: 1px solid #aebc91; border-radius: 3px; font-size: 11px; cursor: pointer; }
+.cookie-banner-reject { background: transparent; color: #f7f8f2; }
+.cookie-banner-accept { background: #d4ed9b; color: #23281c; }
+.cookie-banner button:hover { filter: brightness(.94); }
 .skip-link { position: fixed; top: 10px; left: 10px; z-index: 60; background: #d4ed9b; padding: 12px 20px; transform: translateY(-200%); }
 .skip-link:focus { transform: translateY(0); }
 @media (max-width: 1050px) {
@@ -334,10 +353,14 @@ p { text-wrap: pretty; }
   .header-inner { min-height: 72px; gap: 12px; }
   .brand-logo { width: 158px; }
   .desktop-nav { display: none; }
+  .header-socials { display: none; }
   .header-cta { margin-left: auto; padding: 10px 12px; gap: 10px; font-size: 11px; }
   .menu-toggle { display: block; font-size: 11px; min-height: 44px; min-width: 54px; }
   .mobile-nav { display: flex; flex-direction: column; padding: 10px 24px 20px; max-height: calc(100dvh - 72px); overflow-y: auto; border-top: 1px solid var(--studio-line); }
   .mobile-nav a { padding: 13px 0; font-size: 14px; border-bottom: 1px solid var(--studio-line); }
+  .mobile-socials { display: flex; align-items: center; justify-content: space-between; padding-top: 18px; color: #666d5b; font-size: 12px; }
+  .mobile-socials > div { display: flex; gap: 14px; }
+  .mobile-socials a { display: grid; place-items: center; padding: 0; border: 0; color: #596743; }
   .hero-studio { grid-template-columns: 1fr; padding-block: 42px 40px; gap: 38px; }
   .studio h1 { font-size: clamp(49px, 11vw, 74px); margin-block: 20px 24px; }
   .studio .hero-description { font-size: 15px; }
@@ -406,6 +429,8 @@ p { text-wrap: pretty; }
   .site-footer { padding-bottom: 30px; }
   .footer-top,.footer-bottom { flex-direction: column; align-items: start; }
   .footer-brand { font-size: 23px; }
+  .cookie-banner { right: 12px; bottom: 12px; left: 12px; width: auto; flex-direction: column; align-items: stretch; gap: 14px; }
+  .cookie-banner-actions { justify-content: flex-end; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
