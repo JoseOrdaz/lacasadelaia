@@ -11,6 +11,7 @@ import type {
   Testimonial,
 } from '@/types'
 import { newsContentToHTML } from '@/lib/news-content'
+import { tools as curatedTools } from '@/data/tools'
 
 async function getPayloadClient() {
   return getPayload({ config: configPromise })
@@ -225,7 +226,9 @@ export async function getFeaturedTools(): Promise<Tool[]> {
 export async function getAllTools(): Promise<Tool[]> {
   const payload = await getPayloadClient()
   const { docs } = await payload.find({ collection: 'tools', limit: 200 })
-  return docs.map(mapTool)
+  const databaseTools = docs.map(mapTool)
+  const existingUrls = new Set(databaseTools.map((tool) => tool.url))
+  return [...databaseTools, ...curatedTools.filter((tool) => !existingUrls.has(tool.url))]
 }
 
 export async function getAllTemplates(): Promise<Template[]> {

@@ -22,7 +22,10 @@ export default function ToolCard({ tool }: ToolCardProps) {
           </span>
         </div>
 
-        <CategoryPill category={tool.category} />
+        <div className="flex items-center gap-2">
+          <CategoryPill category={tool.category} />
+          {tool.featured && <span className="text-[10px] font-body font-semibold uppercase tracking-widest text-[#596743]">Selección</span>}
+        </div>
 
         <p className="font-body text-sm text-ink/70 leading-relaxed mt-3 mb-4 flex-1">
           {tool.description}

@@ -49,6 +49,18 @@ export default async function Home() {
       </div>
     </section>
     <div className="expertise-strip"><div className="wrap"><span>El problema primero.<br /><strong>La tecnología, después.</strong></span><span>Inteligencia artificial</span><span>n8n & integraciones</span><span>Desarrollo a medida</span><span>Empresas & particulares</span></div></div>
+    <section className="home-visual wrap" aria-label="Cómo empieza un proyecto">
+      <div className="home-visual-media">
+        <Image src="/home/workbench-ai.png" alt="Mesa de trabajo con un esquema de proceso, tarjetas y un portátil" fill priority sizes="(max-width: 760px) 100vw, 720px" />
+        <span>01 / ENTENDER EL PROCESO</span>
+      </div>
+      <div className="home-visual-copy">
+        <p className="eyebrow">ANTES DE ABRIR OTRA PESTAÑA</p>
+        <h2>La mejor solución empieza <em>en el papel.</em></h2>
+        <p>Primero entendemos qué ocurre de verdad: qué repites, qué información se pierde y dónde necesitas seguir teniendo el control.</p>
+        <Link className="text-link" href="/tools">Explorar el directorio de herramientas <ArrowUpRight size={20} aria-hidden="true" /></Link>
+      </div>
+    </section>
     <section className="section-studio wrap problem-section">
       <div><p className="eyebrow">¿TE SUENA?</p><h2>Si lo haces una<br />y otra vez,<br /><em>hablemos.</em></h2><p>No necesitas otra herramienta que aprender. Necesitas que las que ya usas trabajen mejor juntas.</p></div>
       <div className="problem-list">{['Copias datos de una aplicación a otra.', 'Publicas a mano en tus redes sociales.', 'Respondes siempre las mismas preguntas.', 'Pierdes horas preparando informes.', 'Tienes información repartida entre emails, Excel y otras herramientas.'].map((text, i) => <div key={text}><span>0{i + 1}</span><p>{text}</p><ArrowUpRight size={19} aria-hidden="true" /></div>)}<p className="problem-close">Si haces lo mismo una y otra vez, probablemente podamos automatizarlo.</p></div>

@@ -192,6 +192,16 @@ export const tools: Tool[] = [
     featured: false,
   },
   {
+    id: 'autoskills',
+    name: 'AutoSkills',
+    description: 'Detecta el stack tecnológico de tu proyecto e instala las skills de agentes IA más adecuadas desde un registro curado.',
+    category: 'Código',
+    useCase: 'Preparar un proyecto para trabajar con agentes IA sin buscar y configurar cada skill a mano.',
+    url: 'https://www.autoskills.sh/',
+    badge: 'Gratis',
+    featured: true,
+  },
+  {
     id: 'replit-ai',
     name: 'Replit AI',
     description: 'Entorno de desarrollo en la nube con IA. Escribe, ejecuta y despliega aplicaciones web directamente desde el navegador.',
