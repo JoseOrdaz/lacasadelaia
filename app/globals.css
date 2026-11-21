@@ -458,3 +458,16 @@ p { text-wrap: pretty; }
   html { scroll-behavior: auto; }
   *,*::before,*::after { animation: none !important; transition: none !important; }
 }
+
+/* Tarjetas de precio: cabecera de altura fija para que los títulos queden alineados con o sin badge. */
+.pricing-card-top { min-height: 26px; }
+.pricing-card h3 { min-height: 2.5em; }
+
+/* CTA fija en móvil */
+.mobile-sticky-cta { display: none; }
+@media (max-width: 760px) {
+  .mobile-sticky-cta { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 10px 10px 16px; border: 1px solid #3c4930; border-radius: 6px; background: #23281c; color: #faf9f4; font-size: 13px; box-shadow: 0 12px 30px #1a1a1830; transform: translateY(140%); transition: transform .25s ease; }
+  .mobile-sticky-cta.is-visible { transform: translateY(0); }
+  .mobile-sticky-cta .action { padding: 12px 16px; white-space: nowrap; }
+  .pricing-card h3 { min-height: 0; }
+}

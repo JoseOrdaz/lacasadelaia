@@ -1,11 +1,23 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { PREFILL_EVENT } from '@/components/PrefillContactLink'
 
 export default function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'saved' | 'error'>('idle')
   const [error, setError] = useState('')
+  const messageRef = useRef<HTMLTextAreaElement>(null)
+  useEffect(() => {
+    const prefill = (event: Event) => {
+      const field = messageRef.current
+      const text = (event as CustomEvent<string>).detail
+      if (!field || !text || field.value.trim()) return
+      field.value = text
+    }
+    window.addEventListener(PREFILL_EVENT, prefill)
+    return () => window.removeEventListener(PREFILL_EVENT, prefill)
+  }, [])
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (status === 'sending') return
@@ -29,7 +41,7 @@ export default function ContactForm() {
       <label>Nombre<input name="name" autoComplete="name" required maxLength={100} placeholder="¿Cómo te llamas?" /></label>
       <label>Email<input name="email" type="email" autoComplete="email" required maxLength={254} placeholder="tu@email.com" /></label>
     </div>
-    <label>¿Qué necesitas?<textarea name="message" required minLength={10} maxLength={5000} rows={5} placeholder="Por ejemplo: cada día copio los datos de los emails a un Excel y me gustaría dejar de hacerlo a mano." /></label>
+    <label>¿Qué necesitas?<textarea ref={messageRef} name="message" required minLength={10} maxLength={5000} rows={5} placeholder="Por ejemplo: cada día copio los datos de los emails a un Excel y me gustaría dejar de hacerlo a mano." /></label>
     <div className="form-trap" aria-hidden="true"><label>Tu web<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
     <label className="privacy-check"><input type="checkbox" name="privacy" required /><span>He leído la <Link href="/privacidad">política de privacidad</Link>. Mis datos se usarán para responder a esta consulta.</span></label>
     <button className="action" disabled={status === 'sending'} type="submit">{status === 'sending' ? 'Enviando…' : 'Cuéntame qué quieres automatizar →'}</button>
