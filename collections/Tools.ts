@@ -27,6 +27,7 @@ export const Tools: CollectionConfig = {
     },
     { name: 'useCase', type: 'text', required: true, label: 'Caso de uso' },
     { name: 'url', type: 'text', required: true, label: 'URL' },
+    { name: 'affiliateUrl', type: 'text', label: 'Enlace de afiliado (opcional)', admin: { description: 'Si lo rellenas, el botón usará este enlace y se marcará como enlace de afiliado.' } },
     {
       name: 'badge',
       type: 'select',

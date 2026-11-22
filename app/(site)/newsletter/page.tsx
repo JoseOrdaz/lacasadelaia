@@ -4,7 +4,7 @@ import NewsletterForm from '@/components/NewsletterForm'
 export const metadata: Metadata = {
   title: 'Newsletter de IA para profesionales | La Casa de la IA',
   description:
-    'Suscríbete y recibe una idea práctica de IA cada semana. Herramientas, plantillas y flujos de trabajo sin humo.',
+    'Suscríbete y recibe gratis la guía «10 automatizaciones que ahorran horas cada semana», más una idea práctica de IA cada semana.',
 }
 
 const contentExamples = [
@@ -66,17 +66,17 @@ export default function NewsletterPage() {
               </span>
             </h1>
             <p className="font-body text-base md:text-lg text-ink/70 leading-relaxed mb-8">
-              Sin humo. Sin promesas mágicas. Solo herramientas, prompts y flujos de trabajo
-              que puedes aplicar de verdad en tu trabajo.
+              Al suscribirte recibes gratis la guía <strong>«10 automatizaciones que ahorran horas cada semana»</strong>.
+              Después, una idea práctica de IA por semana. Sin humo y sin promesas mágicas.
             </p>
 
             <div className="bg-cream border border-carbon rounded-sm p-6 shadow-card max-w-md">
               <p className="font-body text-sm font-semibold text-carbon mb-4">
-                Únete a los primeros suscriptores
+                Recibe la guía gratis
               </p>
               <NewsletterForm variant="page" />
               <p className="mt-3 font-body text-xs text-mist">
-                Sin spam. Gratis para siempre. Cancela cuando quieras.
+                Sin spam. Te das de baja con un clic.
               </p>
             </div>
           </div>

@@ -3,33 +3,14 @@
 import { useState } from 'react'
 import TemplateCard from '@/components/TemplateCard'
 import NewsletterForm from '@/components/NewsletterForm'
+import LeadForm from '@/components/LeadForm'
 import type { Template } from '@/types'
 
 export default function TemplatesClient({ templates }: { templates: Template[] }) {
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null)
-  const [modalEmail, setModalEmail] = useState('')
-  const [modalStatus, setModalStatus] = useState<'idle' | 'loading' | 'success'>('idle')
 
-  const handleDownload = (template: Template) => {
-    setSelectedTemplate(template)
-    setModalStatus('idle')
-    setModalEmail('')
-  }
-
-  const handleModalSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!modalEmail) return
-    setModalStatus('loading')
-    console.log('Template download request:', { email: modalEmail, template: selectedTemplate?.id })
-    await new Promise((r) => setTimeout(r, 800))
-    setModalStatus('success')
-  }
-
-  const closeModal = () => {
-    setSelectedTemplate(null)
-    setModalStatus('idle')
-    setModalEmail('')
-  }
+  const handleDownload = (template: Template) => setSelectedTemplate(template)
+  const closeModal = () => setSelectedTemplate(null)
 
   return (
     <>
@@ -87,51 +68,18 @@ export default function TemplatesClient({ templates }: { templates: Template[] }
             </div>
 
             <div className="p-6">
-              {modalStatus === 'success' ? (
-                <div className="text-center py-4 animate-fade-in">
-                  <div className="w-14 h-14 bg-lime-light border border-lime rounded-sm flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">✓</span>
-                  </div>
-                  <p className="font-display text-xl text-carbon mb-2">¡Listo!</p>
-                  <p className="font-body text-sm text-ink/70 mb-6">
-                    Te enviamos la plantilla al email en breve.
-                  </p>
-                  <button
-                    onClick={closeModal}
-                    className="font-body text-sm font-semibold text-carbon border border-carbon rounded-sm px-6 py-2.5 hover:bg-carbon hover:text-cream transition-colors duration-150"
-                  >
-                    Cerrar
-                  </button>
-                </div>
-              ) : (
-                <>
-                  <p className="font-body text-sm text-ink/70 leading-relaxed mb-6">
-                    Déjanos tu email y te enviamos la plantilla al instante.
-                    Sin spam, solo recursos prácticos.
-                  </p>
-                  <form onSubmit={handleModalSubmit} className="space-y-3">
-                    <input
-                      type="email"
-                      value={modalEmail}
-                      onChange={(e) => setModalEmail(e.target.value)}
-                      placeholder="tu@email.com"
-                      required
-                      disabled={modalStatus === 'loading'}
-                      className="w-full font-body text-sm text-carbon bg-cream border border-carbon rounded-sm px-4 py-3 outline-none placeholder:text-mist focus:ring-2 focus:ring-lime/40 disabled:opacity-50 transition-all"
-                    />
-                    <button
-                      type="submit"
-                      disabled={modalStatus === 'loading' || !modalEmail}
-                      className="w-full font-body font-semibold text-sm bg-lime text-carbon border border-carbon rounded-sm px-6 py-3 hover:bg-lime-hover transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {modalStatus === 'loading' ? 'Enviando...' : 'Recibir plantilla →'}
-                    </button>
-                  </form>
-                  <p className="mt-3 font-body text-xs text-mist text-center">
-                    Sin spam. Cancela cuando quieras.
-                  </p>
-                </>
-              )}
+              <p className="font-body text-sm text-ink/70 leading-relaxed mb-6">
+                Déjame tu email y te doy acceso a la plantilla. Sin spam, solo recursos prácticos.
+              </p>
+              <LeadForm
+                key={selectedTemplate.id}
+                source="template"
+                detail={`Plantilla: ${selectedTemplate.title}`}
+                button="Recibir plantilla →"
+                success={selectedTemplate.downloadUrl
+                  ? <p><strong>¡Listo!</strong> <a href={selectedTemplate.downloadUrl} target="_blank" rel="noopener noreferrer">Descargar «{selectedTemplate.title}» →</a></p>
+                  : <p><strong>¡Listo!</strong> Te envío la plantilla a tu email en cuanto la revise.</p>}
+              />
             </div>
           </div>
         </div>

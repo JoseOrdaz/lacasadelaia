@@ -28,6 +28,7 @@ function mapTool(doc: any): Tool {
     category: doc.category,
     useCase: doc.useCase,
     url: doc.url,
+    affiliateUrl: doc.affiliateUrl || undefined,
     badge: doc.badge,
     featured: doc.featured ?? false,
   }
@@ -44,6 +45,9 @@ function mapTemplate(doc: any): Template {
     problem: doc.problem,
     audience: doc.audience,
     howToUse: doc.howToUse,
+    downloadUrl: doc.downloadUrl || undefined,
+    price: doc.price || undefined,
+    buyUrl: doc.buyUrl || undefined,
   }
 }
 
@@ -158,7 +162,7 @@ export async function getUseCases(): Promise<UseCase[]> {
 
 export async function getTestimonials(): Promise<Testimonial[]> {
   const payload = await getPayloadClient()
-  const { docs } = await payload.find({ collection: 'testimonials', sort: 'order', limit: 20 })
+  const { docs } = await payload.find({ collection: 'testimonials', sort: 'order', limit: 20, where: { verified: { equals: true } } })
   return docs.map(mapTestimonial)
 }
 

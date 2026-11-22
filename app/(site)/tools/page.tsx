@@ -29,6 +29,7 @@ export default async function ToolsPage() {
             <p className="font-body text-base md:text-lg text-ink/70 max-w-xl leading-relaxed">
               Una selección curada para escribir, investigar, crear, automatizar y construir. Elige por el problema que quieres resolver, no por la moda del momento.
             </p>
+            {tools.some((t) => t.affiliateUrl) && <p className="mt-4 font-body text-xs text-mist max-w-xl">Algunos enlaces son de afiliado: si contratas a través de ellos recibo una comisión, sin coste extra para ti. No cambia qué herramientas recomiendo.</p>}
           </div>
           <div className="tools-hero-art">
             <Image

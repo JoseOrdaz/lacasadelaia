@@ -15,5 +15,6 @@ export const Testimonials: CollectionConfig = {
     { name: 'company', type: 'text', required: true, label: 'Empresa' },
     { name: 'result', type: 'text', required: true, label: 'Resultado concreto (ej: -14h/semana)' },
     { name: 'order', type: 'number', required: true, defaultValue: 0, label: 'Orden' },
+    { name: 'verified', type: 'checkbox', defaultValue: false, label: 'Cliente real y con permiso para publicarlo', admin: { description: 'Solo los testimonios marcados se muestran en la web.' } },
   ],
 }

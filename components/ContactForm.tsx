@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { PREFILL_EVENT } from '@/components/PrefillContactLink'
 
-export default function ContactForm() {
+export default function ContactForm({ note }: { note?: string }) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'saved' | 'error'>('idle')
   const [error, setError] = useState('')
   const messageRef = useRef<HTMLTextAreaElement>(null)
@@ -15,6 +15,9 @@ export default function ContactForm() {
       if (!field || !text || field.value.trim()) return
       field.value = text
     }
+    // Mensaje que llega desde otras páginas: /?mensaje=...#contacto
+    const fromUrl = new URLSearchParams(window.location.search).get('mensaje')
+    if (fromUrl && messageRef.current && !messageRef.current.value) messageRef.current.value = fromUrl.slice(0, 1000)
     window.addEventListener(PREFILL_EVENT, prefill)
     return () => window.removeEventListener(PREFILL_EVENT, prefill)
   }, [])
@@ -45,6 +48,7 @@ export default function ContactForm() {
     <div className="form-trap" aria-hidden="true"><label>Tu web<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
     <label className="privacy-check"><input type="checkbox" name="privacy" required /><span>He leído la <Link href="/privacidad">política de privacidad</Link>. Mis datos se usarán para responder a esta consulta.</span></label>
     <button className="action" disabled={status === 'sending'} type="submit">{status === 'sending' ? 'Enviando…' : 'Cuéntame qué quieres automatizar →'}</button>
+    {note && <p className="form-note">{note}</p>}
     <div aria-live="polite" role="status">{status === 'success' && <p className="form-success">Tu consulta se ha enviado correctamente. Te responderé al email que has indicado.</p>}{status === 'saved' && <p className="form-success">Tu consulta se ha guardado correctamente. La notificación por email está pendiente, pero revisaré tu mensaje igualmente.</p>}{status === 'error' && <p className="form-error">{error}</p>}</div>
   </form>
 }

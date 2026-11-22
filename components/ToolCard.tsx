@@ -39,13 +39,14 @@ export default function ToolCard({ tool }: ToolCardProps) {
 
       <div className="px-5 pb-5">
         <a
-          href={tool.url}
+          href={tool.affiliateUrl || tool.url}
           target="_blank"
-          rel="noopener noreferrer"
+          rel={tool.affiliateUrl ? 'sponsored noopener noreferrer' : 'noopener noreferrer'}
           className="block w-full text-center text-sm font-body font-semibold text-carbon border border-carbon rounded-sm py-2.5 hover:bg-carbon hover:text-cream transition-colors duration-150"
         >
           Visitar herramienta →
         </a>
+        {tool.affiliateUrl && <p className="mt-2 text-center text-[11px] font-body text-mist">Enlace de afiliado: si contratas, recibo una comisión sin coste extra para ti.</p>}
       </div>
     </article>
   )

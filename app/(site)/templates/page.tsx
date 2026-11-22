@@ -16,10 +16,10 @@ export default async function TemplatesPage() {
       <div className="border-b border-faded bg-parchment">
         <div className="container-main py-12 md:py-16">
           <span className="inline-block font-body text-xs font-semibold uppercase tracking-widest text-mist border border-faded px-3 py-1 rounded-sm mb-4">
-            Recursos gratuitos
+            Plantillas y flujos
           </span>
           <h1 className="font-display text-4xl md:text-5xl text-carbon leading-tight mb-4">
-            {templates.length} plantillas gratis
+            {templates.length} plantillas listas para usar
           </h1>
           <p className="font-body text-base md:text-lg text-ink/70 max-w-xl leading-relaxed">
             Prompts, checklists y flujos de trabajo listos para copiar y adaptar.

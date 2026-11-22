@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getAllNewsSlugs } from '@/lib/payload'
+import { sectors } from '@/data/offers'
 
 export const revalidate = 60
 
@@ -15,6 +16,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/tools`, changeFrequency: 'weekly', priority: 0.6 },
     { url: `${BASE_URL}/templates`, changeFrequency: 'weekly', priority: 0.6 },
     { url: `${BASE_URL}/newsletter`, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/auditoria-ia`, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE_URL}/formacion`, changeFrequency: 'monthly', priority: 0.7 },
+    ...sectors.map((sector) => ({ url: `${BASE_URL}/automatizacion/${sector.slug}`, changeFrequency: 'monthly' as const, priority: 0.8 })),
   ]
 
   let newsRoutes: MetadataRoute.Sitemap = []

@@ -42,6 +42,7 @@ export interface Tool {
   category: ToolCategory
   useCase: string
   url: string
+  affiliateUrl?: string
   badge: Badge
   featured: boolean
 }
@@ -55,6 +56,9 @@ export interface Template {
   problem: string
   audience: string
   howToUse: string
+  downloadUrl?: string
+  price?: string
+  buyUrl?: string
 }
 
 export interface NewsItem {

@@ -35,6 +35,7 @@ export default function TemplateCard({ template, expanded = false, onDownload }:
               <span className={`text-xs font-body font-bold px-2 py-0.5 rounded-sm border ${levelStyles[template.level]}`}>
                 {template.level}
               </span>
+              <span className="text-xs font-body font-semibold text-[#596743]">{template.price && template.buyUrl ? template.price : 'Gratis'}</span>
             </div>
             <h3 className="font-display text-lg md:text-xl text-carbon leading-tight">{template.title}</h3>
           </div>
@@ -61,12 +62,23 @@ export default function TemplateCard({ template, expanded = false, onDownload }:
       </div>
 
       <div className="px-5 pb-5">
-        <button
-          onClick={() => onDownload?.(template)}
-          className="block w-full text-center text-sm font-body font-semibold bg-lime text-carbon border border-carbon rounded-sm py-2.5 hover:bg-lime-hover transition-colors duration-150"
-        >
-          Descargar plantilla →
-        </button>
+        {template.price && template.buyUrl ? (
+          <a
+            href={template.buyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between w-full text-sm font-body font-semibold bg-carbon text-cream border border-carbon rounded-sm px-4 py-2.5 hover:bg-ink transition-colors duration-150"
+          >
+            <span>Comprar plantilla →</span><span>{template.price}</span>
+          </a>
+        ) : (
+          <button
+            onClick={() => onDownload?.(template)}
+            className="block w-full text-center text-sm font-body font-semibold bg-lime text-carbon border border-carbon rounded-sm py-2.5 hover:bg-lime-hover transition-colors duration-150"
+          >
+            Descargar gratis →
+          </button>
+        )}
       </div>
     </article>
   )
